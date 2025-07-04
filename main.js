@@ -117,7 +117,7 @@ async function sendRequestToBackend(prompt, formData) {
         if (Array.isArray(questions)) {
             // Save questions to localStorage and redirect to flashcard page
             localStorage.setItem('generatedQuestions', JSON.stringify(questions));
-            window.location.href = 'quiz-flashcard.html';
+            window.location.href = 'flashcard.html';
         } else {
             throw new Error('Invalid response format from backend');
         }
