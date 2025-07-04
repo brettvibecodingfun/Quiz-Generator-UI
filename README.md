@@ -28,7 +28,7 @@ An Express server that generates trivia questions using OpenAI's GPT-4 API.
    ```
 
 4. **Access the application:**
-   - Frontend: http://localhost:3000/quiz-generator.html
+   - Frontend: http://localhost:3000
    - Health check: http://localhost:3000/health
 
 ## API Endpoints
