@@ -105,9 +105,101 @@ select:focus {
     transform: translateY(0);
 }
 
-.hidden {
-    display: none;
-}
+        .hidden {
+            display: none;
+        }
+
+        .custom-subcategory {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+        }
+
+        .custom-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .custom-input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .custom-input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .add-custom-btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-custom-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .add-custom-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .custom-subcategories-list {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .custom-subcategory-item {
+            display: flex;
+            align-items: center;
+            background: #e8f5e8;
+            border: 1px solid #4CAF50;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .custom-subcategory-item input[type="checkbox"] {
+            margin-right: 8px;
+            transform: scale(1.1);
+        }
+
+        .remove-custom-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .remove-custom-btn:hover {
+            background: #d32f2f;
+        }
 
 .spinner {
     display: inline-block;

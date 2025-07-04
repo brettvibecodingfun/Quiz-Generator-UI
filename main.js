@@ -22,6 +22,12 @@ const subcategories = {
 const mainCategorySelect = document.getElementById('mainCategory');
 const subcategoriesDiv = document.getElementById('subcategories');
 const quizForm = document.getElementById('quizForm');
+const customSubcategoryInput = document.getElementById('customSubcategory');
+const addCustomBtn = document.getElementById('addCustomBtn');
+const customSubcategoriesList = document.getElementById('customSubcategories');
+
+// Array to store custom subcategories
+let customSubcategories = [];
 
 // Function to populate subcategories
 function populateSubcategories(category) {
@@ -51,6 +57,54 @@ mainCategorySelect.addEventListener('change', function() {
 
 // Initialize with Sports subcategories on page load
 populateSubcategories('Sports');
+
+// Add custom subcategory functionality
+addCustomBtn.addEventListener('click', addCustomSubcategory);
+customSubcategoryInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        addCustomSubcategory();
+    }
+});
+
+function addCustomSubcategory() {
+    const customValue = customSubcategoryInput.value.trim();
+    if (customValue && customValue.length > 0) {
+        // Check if it already exists
+        if (!customSubcategories.includes(customValue)) {
+            customSubcategories.push(customValue);
+            renderCustomSubcategories();
+            customSubcategoryInput.value = '';
+            addCustomBtn.disabled = true;
+        }
+    }
+}
+
+function removeCustomSubcategory(subcategory) {
+    const index = customSubcategories.indexOf(subcategory);
+    if (index > -1) {
+        customSubcategories.splice(index, 1);
+        renderCustomSubcategories();
+    }
+}
+
+function renderCustomSubcategories() {
+    customSubcategoriesList.innerHTML = '';
+    customSubcategories.forEach(subcat => {
+        const item = document.createElement('div');
+        item.className = 'custom-subcategory-item';
+        item.innerHTML = `
+            <input type="checkbox" name="subcategories" value="${subcat}" checked>
+            <span>${subcat}</span>
+            <button type="button" class="remove-custom-btn" onclick="removeCustomSubcategory('${subcat}')">×</button>
+        `;
+        customSubcategoriesList.appendChild(item);
+    });
+}
+
+// Enable/disable add button based on input
+customSubcategoryInput.addEventListener('input', function() {
+    addCustomBtn.disabled = !this.value.trim();
+});
 
 // Handle form submission
 quizForm.addEventListener('submit', function(e) {
