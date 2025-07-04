@@ -3,140 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flashcard Viewer</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    #flashcard {
-      background: white;
-      width: 400px;
-      height: 200px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      padding: 20px;
-      text-align: center;
-    }
-    #instructions {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #333;
-    }
-    input[type="file"] {
-      margin-bottom: 20px;
-    }
-    #score {
-      margin-bottom: 15px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #333;
-      background: #e8f5e8;
-      padding: 10px 15px;
-      border-radius: 8px;
-      border: 2px solid #4CAF50;
-    }
-  </style>
+  <title>Quiz Flashcards</title>
+  <link rel="stylesheet" href="flashcard.css">
 </head>
 <body>
-  <input type="file" id="fileInput" accept="application/JSON" />
-  <div id="score">Correct: 0 | Total Answered: 0</div>
-  <div id="flashcard">Load a JSON file to begin</div>
-  <div id="instructions">Space = Show Answer | → = Next Card | ← = Previous Card | 1 = Correct | 2 = Incorrect</div>
+  <div class="container">
+    <h1>Quiz Flashcards</h1>
+    <div id="score">Correct: 0 / 0</div>
+    
+    <!-- Answer buttons -->
+    <div class="answer-buttons">
+      <button class="answer-btn correct-btn" onclick="markCorrect()">✅ Correct</button>
+      <button class="answer-btn incorrect-btn" onclick="markIncorrect()">❌ Incorrect</button>
+    </div>
+    
+    <!-- Flashcard with navigation -->
+    <div class="flashcard-container">
+      <button class="nav-arrow prev-arrow" onclick="previousCard()">←</button>
+      <div id="flashcard">Loading flashcards...</div>
+      <button class="nav-arrow next-arrow" onclick="nextCard()">→</button>
+    </div>
+    
+    <div id="instructions">Tap the card to flip | Use arrows to navigate | Use buttons above to mark answers</div>
+    <button id="backButton" onclick="goBack()">Back to Quiz Generator</button>
+  </div>
 
-  <script>
-    let flashcards = [];
-    let currentCardIndex = 0;
-    let showingAnswer = false;
-    let correctAnswers = 0;
-    let totalAnswered = 0;
-
-    const flashcardElement = document.getElementById('flashcard');
-    const fileInput = document.getElementById('fileInput');
-    const scoreElement = document.getElementById('score');
-
-    fileInput.addEventListener('change', function (e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          try {
-            const data = JSON.parse(event.target.result);
-            if (Array.isArray(data)) {
-              flashcards = data;
-              currentCardIndex = 0;
-              showingAnswer = false;
-              correctAnswers = 0;
-              totalAnswered = 0;
-              updateScore();
-              renderCard();
-            } else {
-              flashcardElement.textContent = 'Invalid JSON format';
-            }
-          } catch (err) {
-            flashcardElement.textContent = 'Error parsing JSON';
-          }
-        };
-        reader.readAsText(file);
-      }
-    });
-
-    function updateScore() {
-      scoreElement.textContent = `Correct: ${correctAnswers} | Total Answered: ${totalAnswered}`;
-    }
-
-    function renderCard() {
-      if (flashcards.length === 0) return;
-      const card = flashcards[currentCardIndex];
-      flashcardElement.textContent = showingAnswer ? card.answer : card.question;
-    }
-
-    document.addEventListener('keydown', function (e) {
-      if (flashcards.length === 0) return;
-
-      if (e.code === 'Space') {
-        showingAnswer = !showingAnswer;
-        renderCard();
-        e.preventDefault();
-      } else if (e.code === 'ArrowRight') {
-        currentCardIndex = (currentCardIndex + 1) % flashcards.length;
-        showingAnswer = false;
-        renderCard();
-      } else if (e.code === 'ArrowLeft') {
-        currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
-        showingAnswer = false;
-        renderCard();
-      } else if (e.code === 'Digit1') {
-        if (showingAnswer) {
-          correctAnswers++;
-          totalAnswered++;
-          updateScore();
-          // Move to next card after answering
-          currentCardIndex = (currentCardIndex + 1) % flashcards.length;
-          showingAnswer = false;
-          renderCard();
-        }
-      } else if (e.code === 'Digit2') {
-        if (showingAnswer) {
-          totalAnswered++;
-          updateScore();
-          // Move to next card after answering
-          currentCardIndex = (currentCardIndex + 1) % flashcards.length;
-          showingAnswer = false;
-          renderCard();
-        }
-      }
-    });
-  </script>
+  <script src="flashcard.js"></script>
 </body>
 </html>
