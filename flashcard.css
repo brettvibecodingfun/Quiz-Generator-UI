@@ -1,6 +1,6 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #1D428A;
   margin: 0;
   padding: 20px;
   min-height: 100vh;
@@ -57,13 +57,18 @@ h1 {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   min-width: 120px;
+  background: #1D428A;
+  color: white;
 }
 
 .answer-btn:hover {
+  background: #16316a;
   transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(29, 66, 138, 0.2);
 }
 
 .answer-btn:active {
+  background: #0e2040;
   transform: translateY(0);
 }
 
@@ -189,7 +194,7 @@ h1 {
 #backButton {
   margin-top: 25px;
   padding: 15px 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #1D428A;
   color: white;
   border: none;
   border-radius: 8px;
@@ -200,11 +205,13 @@ h1 {
 }
 
 #backButton:hover {
+  background: #16316a;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 20px rgba(29, 66, 138, 0.2);
 }
 
 #backButton:active {
+  background: #0e2040;
   transform: translateY(0);
 }
 

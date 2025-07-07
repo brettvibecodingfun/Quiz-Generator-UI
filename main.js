@@ -95,11 +95,19 @@ function renderCustomSubcategories() {
         item.innerHTML = `
             <input type="checkbox" name="subcategories" value="${subcat}" checked>
             <span>${subcat}</span>
-            <button type="button" class="remove-custom-btn" onclick="removeCustomSubcategory('${subcat}')">×</button>
+            <button type="button" class="remove-custom-btn" data-subcat="${subcat}">×</button>
         `;
         customSubcategoriesList.appendChild(item);
     });
 }
+
+// Event delegation for remove buttons
+customSubcategoriesList.addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-custom-btn')) {
+        const subcat = e.target.getAttribute('data-subcat');
+        removeCustomSubcategory(subcat);
+    }
+});
 
 // Enable/disable add button based on input
 customSubcategoryInput.addEventListener('input', function() {
